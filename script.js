@@ -1,193 +1,233 @@
-/* =========================================
-   WEDDING COUNTDOWN
-========================================= */
+// ========================================
+// WEDDING WEBSITE SETTINGS
+// Change these values for your wedding.
+// ========================================
 
-// Change this to your actual wedding date/time
-const weddingDate = new Date("December 20, 2026 10:30:00").getTime();
+const WEDDING_DATE = "2027-02-14T09:00:00+05:30";
 
+// Replace with your WhatsApp number.
+// India example: 919876543210
+// Do not include +, spaces, or hyphens.
+const WHATSAPP_NUMBER = "919999999999";
+
+const VENUE_ADDRESS =
+  "The Grand Garden Convention Hall, 12 Celebration Avenue, Bengaluru, Karnataka 560001, India";
+
+
+// ========================================
+// BACKGROUND MUSIC PLAYER
+// ========================================
+
+const audio = document.getElementById("weddingAudio");
+const musicToggle = document.getElementById("musicToggle");
+const musicLabel = document.getElementById("musicLabel");
+
+musicToggle.addEventListener("click", async () => {
+  if (audio.paused) {
+    try {
+      await audio.play();
+
+      musicToggle.classList.add("playing");
+      musicToggle.setAttribute("aria-pressed", "true");
+      musicLabel.textContent = "Pause music";
+    } catch (error) {
+      musicLabel.textContent = "Add music file";
+
+      alert(
+        "Please add your music file at assets/wedding-music.mp3"
+      );
+    }
+  } else {
+    audio.pause();
+
+    musicToggle.classList.remove("playing");
+    musicToggle.setAttribute("aria-pressed", "false");
+    musicLabel.textContent = "Play music";
+  }
+});
+
+
+// ========================================
+// LIVE WEDDING COUNTDOWN
+// ========================================
 
 function updateCountdown() {
+  const targetDate = new Date(WEDDING_DATE).getTime();
+  const now = Date.now();
+  const distance = targetDate - now;
 
-    const now = new Date().getTime();
+  let values;
 
-    const difference = weddingDate - now;
+  if (distance > 0) {
+    values = {
+      days: Math.floor(distance / 86400000),
 
+      hours: Math.floor(
+        (distance % 86400000) / 3600000
+      ),
 
-    // Wedding day has arrived
-    if (difference <= 0) {
+      minutes: Math.floor(
+        (distance % 3600000) / 60000
+      ),
 
-        document.getElementById("days").textContent = "00";
-        document.getElementById("hours").textContent = "00";
-        document.getElementById("minutes").textContent = "00";
-        document.getElementById("seconds").textContent = "00";
+      seconds: Math.floor(
+        (distance % 60000) / 1000
+      )
+    };
+  } else {
+    values = {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0
+    };
+  }
 
-        return;
+  Object.entries(values).forEach(([key, value]) => {
+    const element = document.getElementById(key);
+
+    if (element) {
+      const digits = key === "days" ? 3 : 2;
+
+      element.textContent = String(value).padStart(
+        digits,
+        "0"
+      );
     }
-
-
-    const days = Math.floor(
-        difference / (1000 * 60 * 60 * 24)
-    );
-
-
-    const hours = Math.floor(
-        (difference % (1000 * 60 * 60 * 24))
-        / (1000 * 60 * 60)
-    );
-
-
-    const minutes = Math.floor(
-        (difference % (1000 * 60 * 60))
-        / (1000 * 60)
-    );
-
-
-    const seconds = Math.floor(
-        (difference % (1000 * 60))
-        / 1000
-    );
-
-
-    document.getElementById("days").textContent =
-        String(days).padStart(2, "0");
-
-    document.getElementById("hours").textContent =
-        String(hours).padStart(2, "0");
-
-    document.getElementById("minutes").textContent =
-        String(minutes).padStart(2, "0");
-
-    document.getElementById("seconds").textContent =
-        String(seconds).padStart(2, "0");
+  });
 }
 
-
-// Run immediately
 updateCountdown();
 
-
-// Update every second
 setInterval(updateCountdown, 1000);
 
 
-/* =========================================
-   BACKGROUND MUSIC
-========================================= */
+// ========================================
+// COPY WEDDING VENUE ADDRESS
+// ========================================
 
-const musicButton = document.getElementById("musicButton");
+const copyButton = document.getElementById("copyAddress");
+const copyStatus = document.getElementById("copyStatus");
 
+copyButton.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(VENUE_ADDRESS);
 
-// Change this filename if your music file
-// has a different name
-const weddingMusic = new Audio("music/wedding.mp3");
+    copyStatus.textContent = "Address copied successfully!";
+  } catch (error) {
+    // Fallback for browsers that block clipboard access.
+    copyStatus.textContent = VENUE_ADDRESS;
+  }
 
-weddingMusic.loop = true;
-
-let musicPlaying = false;
-
-
-musicButton.addEventListener("click", function () {
-
-    if (!musicPlaying) {
-
-        weddingMusic.play()
-            .then(() => {
-
-                musicPlaying = true;
-
-                musicButton.textContent = "❚❚";
-
-            })
-            .catch(() => {
-
-                console.log(
-                    "Music could not be started."
-                );
-
-            });
-
-    } else {
-
-        weddingMusic.pause();
-
-        musicPlaying = false;
-
-        musicButton.textContent = "♪";
-    }
-
+  setTimeout(() => {
+    copyStatus.textContent = "";
+  }, 4500);
 });
 
 
-/* =========================================
-   SCROLL REVEAL
-========================================= */
+// ========================================
+// WHATSAPP RSVP
+// ========================================
 
-const revealElements = document.querySelectorAll(
-    ".event-card, .person, .venue-card, .gallery img"
+const rsvpForm = document.getElementById("rsvpForm");
+
+rsvpForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const name = document
+    .getElementById("guestName")
+    .value.trim();
+
+  const attendance = document
+    .getElementById("attendance")
+    .value;
+
+  const guestCount = document
+    .getElementById("guestCount")
+    .value;
+
+  const message = document
+    .getElementById("guestMessage")
+    .value.trim();
+
+  if (!name || !attendance) {
+    alert("Please enter your name and attendance response.");
+    return;
+  }
+
+  const whatsappMessage = [
+    "Wedding RSVP - Aarav & Ananya",
+    "",
+    `Name: ${name}`,
+    `Response: ${attendance}`,
+    `Number of guests: ${guestCount}`,
+    `Message: ${message || "No additional message"}`,
+    "",
+    "Wedding date: 14 February 2027"
+  ].join("\n");
+
+  if (WHATSAPP_NUMBER === "919999999999") {
+    alert(
+      "This is the demo WhatsApp number. " +
+      "Please update WHATSAPP_NUMBER in script.js " +
+      "before publishing your wedding website."
+    );
+
+    return;
+  }
+
+  const whatsappURL =
+    "https://wa.me/" +
+    WHATSAPP_NUMBER +
+    "?text=" +
+    encodeURIComponent(whatsappMessage);
+
+  window.open(
+    whatsappURL,
+    "_blank",
+    "noopener,noreferrer"
+  );
+});
+
+
+// ========================================
+// SCROLL REVEAL ANIMATIONS
+// ========================================
+
+const revealTargets = document.querySelectorAll(
+  ".person-card, " +
+  ".event-card, " +
+  ".venue-copy, " +
+  ".map-wrap, " +
+  ".gallery img, " +
+  ".rsvp-card"
 );
 
+const reducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
 
-const revealObserver = new IntersectionObserver(
-    function (entries) {
+if ("IntersectionObserver" in window && !reducedMotion) {
+  revealTargets.forEach((element) => {
+    element.classList.add("fade-in");
+  });
 
-        entries.forEach(function (entry) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
 
-            if (entry.isIntersecting) {
-
-                entry.target.style.opacity = "1";
-
-                entry.target.style.transform =
-                    "translateY(0)";
-
-                revealObserver.unobserve(entry.target);
-            }
-
-        });
-
+          observer.unobserve(entry.target);
+        }
+      });
     },
     {
-        threshold: 0.15
+      threshold: 0.12
     }
-);
+  );
 
-
-revealElements.forEach(function (element) {
-
-    element.style.opacity = "0";
-
-    element.style.transform =
-        "translateY(30px)";
-
-    element.style.transition =
-        "opacity 0.8s ease, transform 0.8s ease";
-
-    revealObserver.observe(element);
-
-});
-
-
-/* =========================================
-   SMOOTH PAGE LOAD
-========================================= */
-
-window.addEventListener("load", function () {
-
-    document.body.classList.add("loaded");
-
-});
-
-
-/* =========================================
-   PREVENT BROKEN MUSIC BUTTON
-========================================= */
-
-weddingMusic.addEventListener(
-    "error",
-    function () {
-
-        console.log(
-            "Wedding music file not found."
-        );
-
-    }
-);
+  revealTargets.forEach((element) => {
+    observer.observe(element);
+  });
+}
