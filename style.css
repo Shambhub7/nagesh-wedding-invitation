@@ -1,0 +1,775 @@
+/* =========================================
+   GLOBAL
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background: #fbf7f0;
+    color: #3b2424;
+    line-height: 1.7;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+    min-height: 100vh;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            rgba(60, 20, 25, 0.45),
+            rgba(60, 20, 25, 0.45)
+        ),
+        url("images/background.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    color: white;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 20%,
+            rgba(0, 0, 0, 0.25)
+        );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 850px;
+    padding: 30px;
+
+    animation: heroReveal 1.5s ease;
+}
+
+.small-title {
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(70px, 12vw, 150px);
+
+    font-weight: 500;
+    line-height: 0.9;
+
+    letter-spacing: -3px;
+}
+
+.hero h1 span {
+    display: block;
+
+    font-size: 55px;
+
+    margin: 15px 0;
+
+    font-style: italic;
+}
+
+.wedding-date {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 28px;
+
+    margin-top: 35px;
+
+    letter-spacing: 3px;
+}
+
+.hero-message {
+    max-width: 500px;
+
+    margin: 20px auto 35px;
+
+    font-size: 15px;
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.primary-button {
+    display: inline-block;
+
+    padding: 13px 30px;
+
+    border: 1px solid rgba(255,255,255,0.7);
+
+    color: white;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    transition: 0.3s;
+}
+
+.primary-button:hover {
+    background: white;
+    color: #7b1e2b;
+
+    transform: translateY(-3px);
+}
+
+
+/* =========================================
+   MUSIC BUTTON
+========================================= */
+
+.music-button {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    background: #7b1e2b;
+    color: white;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    z-index: 1000;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.2);
+
+    animation: musicPulse 2s infinite;
+}
+
+
+/* =========================================
+   GENERAL SECTION
+========================================= */
+
+section:not(.hero) {
+    padding: 100px 7%;
+    text-align: center;
+}
+
+.section-label {
+    color: #9c5962;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 12px;
+}
+
+section h2 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(40px, 6vw, 65px);
+
+    font-weight: 500;
+
+    line-height: 1.1;
+
+    margin-bottom: 50px;
+}
+
+
+/* =========================================
+   COUNTDOWN
+========================================= */
+
+.countdown-section {
+    background: #f3e8da;
+}
+
+.countdown {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 25px;
+
+    flex-wrap: wrap;
+}
+
+.count-box {
+    width: 120px;
+
+    padding: 25px 15px;
+
+    background: rgba(255,255,255,0.6);
+
+    border: 1px solid rgba(123,30,43,0.12);
+}
+
+.count-box span {
+    display: block;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 48px;
+
+    color: #7b1e2b;
+}
+
+.count-box small {
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    color: #735c5c;
+}
+
+
+/* =========================================
+   COUPLE
+========================================= */
+
+.couple-section {
+    background: #fbf7f0;
+}
+
+.couple-container {
+    max-width: 1000px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 60px;
+}
+
+.person {
+    flex: 1;
+
+    max-width: 300px;
+}
+
+.person-image {
+    width: 240px;
+    height: 300px;
+
+    margin: auto;
+
+    overflow: hidden;
+
+    border-radius: 150px 150px 10px 10px;
+
+    border: 8px solid #f3e8da;
+}
+
+.person-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.6s ease;
+}
+
+.person-image:hover img {
+    transform: scale(1.08);
+}
+
+.person h3 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 35px;
+
+    margin-top: 20px;
+
+    color: #7b1e2b;
+}
+
+.person p {
+    font-size: 12px;
+
+    color: #806d6d;
+}
+
+.heart {
+    font-size: 35px;
+
+    color: #a45a63;
+
+    animation: heartbeat 1.5s infinite;
+}
+
+
+/* =========================================
+   STORY
+========================================= */
+
+.story-section {
+    position: relative;
+
+    background:
+        linear-gradient(
+            rgba(65, 25, 30, 0.88),
+            rgba(65, 25, 30, 0.88)
+        ),
+        url("images/story.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    color: white;
+}
+
+.story-content {
+    max-width: 700px;
+
+    margin: auto;
+}
+
+.story-section .section-label {
+    color: #e6b98a;
+}
+
+.story-section h2 {
+    margin-bottom: 30px;
+}
+
+.story-content p:not(.section-label) {
+    margin-bottom: 20px;
+
+    font-size: 15px;
+
+    opacity: 0.9;
+}
+
+
+/* =========================================
+   EVENTS
+========================================= */
+
+.events-section {
+    background: #f3e8da;
+}
+
+.event-container {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.event-card {
+    padding: 45px 25px;
+
+    background: #fbf7f0;
+
+    border: 1px solid rgba(123,30,43,0.1);
+
+    transition: 0.4s;
+}
+
+.event-card:hover {
+    transform: translateY(-10px);
+
+    box-shadow:
+        0 20px 50px rgba(80,30,30,0.1);
+}
+
+.event-icon {
+    font-size: 35px;
+
+    margin-bottom: 20px;
+}
+
+.event-card h3 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 35px;
+
+    color: #7b1e2b;
+
+    margin-bottom: 15px;
+}
+
+.event-date {
+    color: #9c5962;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   GALLERY
+========================================= */
+
+.gallery-section {
+    background: #fbf7f0;
+}
+
+.gallery {
+    max-width: 1100px;
+
+    margin: auto;
+
+    columns: 3 250px;
+
+    column-gap: 15px;
+}
+
+.gallery img {
+    width: 100%;
+
+    margin-bottom: 15px;
+
+    border-radius: 4px;
+
+    transition: 0.4s;
+}
+
+.gallery img:hover {
+    transform: scale(1.02);
+
+    filter: brightness(0.9);
+}
+
+
+/* =========================================
+   VENUE
+========================================= */
+
+.venue-section {
+    background: #f3e8da;
+}
+
+.venue-card {
+    max-width: 650px;
+
+    margin: auto;
+
+    padding: 55px 30px;
+
+    background: #fbf7f0;
+
+    border: 1px solid rgba(123,30,43,0.1);
+}
+
+.venue-card h3 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 40px;
+
+    color: #7b1e2b;
+
+    margin-bottom: 15px;
+}
+
+.venue-card p {
+    font-size: 14px;
+
+    margin-bottom: 5px;
+}
+
+.venue-card .primary-button {
+    margin-top: 25px;
+
+    background: #7b1e2b;
+
+    border-color: #7b1e2b;
+}
+
+.venue-card .primary-button:hover {
+    background: transparent;
+
+    color: #7b1e2b;
+}
+
+
+/* =========================================
+   RSVP
+========================================= */
+
+.rsvp-section {
+    background:
+        linear-gradient(
+            rgba(123,30,43,0.92),
+            rgba(123,30,43,0.92)
+        ),
+        url("images/rsvp.jpg");
+
+    background-size: cover;
+
+    color: white;
+}
+
+.rsvp-section .section-label {
+    color: #e6b98a;
+}
+
+.rsvp-section h2 {
+    margin-bottom: 20px;
+}
+
+.rsvp-section p {
+    max-width: 550px;
+
+    margin: 0 auto 30px;
+
+    opacity: 0.9;
+}
+
+.whatsapp-button {
+    display: inline-block;
+
+    padding: 14px 30px;
+
+    background: white;
+
+    color: #7b1e2b;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    transition: 0.3s;
+}
+
+.whatsapp-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.2);
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    padding: 35px 20px;
+
+    background: #35181d;
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+}
+
+footer p {
+    margin: 5px;
+}
+
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes heroReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes heartbeat {
+
+    0% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.2);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.15);
+    }
+
+    60% {
+        transform: scale(1);
+    }
+}
+
+
+@keyframes musicPulse {
+
+    0% {
+        box-shadow:
+            0 0 0 0 rgba(123,30,43,0.4);
+    }
+
+    70% {
+        box-shadow:
+            0 0 0 15px rgba(123,30,43,0);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(123,30,43,0);
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .hero {
+        min-height: 100svh;
+
+        background-attachment: scroll;
+    }
+
+    .hero h1 {
+        font-size: 75px;
+
+        letter-spacing: -2px;
+    }
+
+    .hero h1 span {
+        font-size: 40px;
+
+        margin: 10px 0;
+    }
+
+    .wedding-date {
+        font-size: 22px;
+    }
+
+    section:not(.hero) {
+        padding: 75px 20px;
+    }
+
+    section h2 {
+        margin-bottom: 35px;
+    }
+
+    .countdown {
+        gap: 10px;
+    }
+
+    .count-box {
+        width: 80px;
+
+        padding: 18px 8px;
+    }
+
+    .count-box span {
+        font-size: 34px;
+    }
+
+    .count-box small {
+        font-size: 8px;
+    }
+
+    .couple-container {
+        flex-direction: column;
+
+        gap: 25px;
+    }
+
+    .heart {
+        margin: 5px 0;
+    }
+
+    .event-container {
+        grid-template-columns: 1fr;
+    }
+
+    .event-card {
+        padding: 35px 20px;
+    }
+
+    .gallery {
+        columns: 2 140px;
+    }
+
+    .music-button {
+        right: 18px;
+        bottom: 18px;
+
+        width: 48px;
+        height: 48px;
+    }
+}
