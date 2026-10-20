@@ -300,7 +300,7 @@ textarea {
   height: 520px;
   object-fit: cover;
   object-position: center 30%;
-  filter: saturate(0.95);
+}
 }
 
 }
