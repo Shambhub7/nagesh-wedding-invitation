@@ -163,7 +163,7 @@ rsvpForm.addEventListener("submit", (event) => {
     `Number of guests: ${guestCount}`,
     `Message: ${message || "No additional message"}`,
     "",
-    "Wedding date: 14 February 2027"
+    "Wedding date: 1 November 2026"
   ].join("\n");
 
   if (WHATSAPP_NUMBER === "919999999999") {
