@@ -1,78 +1,250 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#7b263a">
-  <meta name="description" content="Join us to celebrate our wedding.">
-  <title>Wedding Invitation | Aarav & Ananya</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation | Aarav & Ananya</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Poppins, sans-serif;
+  color: #4d3030;
+  background: #fffaf5;
+  text-align: center;
+}
+header {
+  min-height: 90vh;
+  padding: 65px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#32140b55, #32140b70),
+    url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=85") center/cover;
+  color: white;
+}
+h1, h2, .script { font-family: "Great Vibes", cursive; }
+h1 { font-size: clamp(3.5rem, 10vw, 6.5rem); margin: 10px 0; }
+header p { letter-spacing: 3px; }
+.button {
+  display: inline-block;
+  padding: 12px 22px;
+  margin: 8px;
+  background: #8c3448;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font: inherit;
+}
+section { padding: 55px 18px; }
+h2 { font-size: 2.8rem; color: #8c3448; margin: 0 0 18px; }
+.names {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+.names img {
+  width: min(38vw, 250px);
+  height: 290px;
+  object-fit: cover;
+  border-radius: 130px 130px 12px 12px;
+}
+.card {
+  max-width: 750px;
+  margin: 20px auto;
+  padding: 25px;
+  border: 1px solid #ead6d1;
+  border-radius: 18px;
+  background: white;
+}
+#countdown {
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  color: #8c3448;
+  font-weight: 600;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  max-width: 950px;
+  margin: auto;
+}
+.gallery img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+iframe {
+  width: 100%;
+  height: 350px;
+  border: 0;
+  border-radius: 14px;
+}
+footer { padding: 30px; background: #8c3448; color: white; }
+</style>
 </head>
 
 <body>
-  <div class="topline"></div>
 
-  <nav class="nav">
-    <a class="brand" href="#home">A <span>♥</span> A</a>
+<header>
+  <p>TOGETHER WITH OUR FAMILIES</p>
+  <h1>Aarav & Ananya</h1>
+  <p>INVITE YOU TO CELEBRATE THEIR WEDDING</p>
+  <h3>15 February 2027 · 10:30 AM</h3>
+  <a class="button" href="#details">View Invitation</a>
+</header>
 
-    <div class="nav-links">
-      <a href="#story">Our Story</a>
-      <a href="#events">The Day</a>
-      <a href="#venue">Venue</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#rsvp">RSVP</a>
+<section>
+  <h2>Two Hearts, One Love</h2>
+  <div class="names">
+    <div>
+      <img src="https://images.unsplash.com/photo-1595152452543-e5fc28ebc2b8?auto=format&fit=crop&w=600&q=85" alt="Sample groom portrait">
+      <h3>Aarav</h3>
     </div>
+    <div>
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=85" alt="Sample bride portrait">
+      <h3>Ananya</h3>
+    </div>
+  </div>
+  <p>With love and blessings, we invite you to share our special day.</p>
+</section>
 
-    <button id="musicToggle" class="music-button" type="button">
-      <span>♫</span> <span id="musicLabel">Play music</span>
-    </button>
-  </nav>
+<section id="details">
+  <h2>Save the Date</h2>
+  <div class="card">
+    <p>Our wedding celebration begins in</p>
+    <div id="countdown">Loading countdown…</div>
+    <p><strong>Wedding Day:</strong> 15 February 2027</p>
+    <p><strong>Muhurtham:</strong> 10:30 AM</p>
+    <p><strong>Venue:</strong> Your Wedding Hall, Vijayawada</p>
+  </div>
+</section>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero" id="home">
-      <div class="hero-shade"></div>
+<section id="music">
+  <h2>Our Wedding Music</h2>
+  <p>Tap below to play or pause the sample music.</p>
+  <button class="button" id="musicButton" type="button">▶ Play Music</button>
+  <audio id="weddingMusic" loop preload="none">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Your browser does not support audio.
+  </audio>
+  <p><small>Demo instrumental track. Replace it with your wedding song when ready.</small></p>
+</section>
 
-      <div class="hero-content">
-        <p class="eyebrow light">WITH LOVE, JOY & BLESSINGS</p>
+<section>
+  <h2>Wedding Events</h2>
+  <div class="card">
+    <h3>Haldi Ceremony</h3>
+    <p>14 February 2027 · 5:00 PM</p>
+  </div>
+  <div class="card">
+    <h3>Wedding Ceremony</h3>
+    <p>15 February 2027 · 10:30 AM</p>
+  </div>
+  <div class="card">
+    <h3>Reception</h3>
+    <p>15 February 2027 · 6:30 PM</p>
+  </div>
+</section>
 
-        <h1>Aarav <em>&</em><br>Ananya</h1>
+<section>
+  <h2>Our Gallery</h2>
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80" alt="Wedding decor">
+    <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=600&q=80" alt="Wedding table decor">
+    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80" alt="Wedding celebration">
+  </div>
+</section>
 
-        <p class="hero-subtitle">
-          Together with our families, we invite you<br>
-          to celebrate the beginning of our forever.
-        </p>
+<section id="location">
+  <h2>Find Our Venue</h2>
+  <p>Your Wedding Hall, Vijayawada, Andhra Pradesh</p>
 
-        <div class="hero-date">
-          <span>✦</span> 14 February 2027 <span>✦</span>
-        </div>
+  <div class="card">
+    <iframe
+      title="Wedding venue map"
+      src="https://maps.google.com/maps?q=Vijayawada%2C%20Andhra%20Pradesh&t=&z=13&ie=UTF8&iwloc=&output=embed"
+      loading="lazy"
+      allowfullscreen>
+    </iframe>
 
-        <a class="button button-light" href="#events">
-          Explore the celebration ↓
-        </a>
-      </div>
+    <a class="button"
+       href="https://www.google.com/maps/dir/?api=1&destination=Vijayawada%2C%20Andhra%20Pradesh"
+       target="_blank" rel="noopener">
+       Get Directions
+    </a>
+  </div>
+</section>
 
-      <div class="hero-bottom">A NEW CHAPTER BEGINS</div>
-    </section>
+<section>
+  <h2>Will You Join Us?</h2>
+  <p>We would love to celebrate with you.</p>
+  <a class="button"
+     href="https://wa.me/?text=Congratulations!%20I%20will%20attend%20your%20wedding."
+     target="_blank" rel="noopener">
+     RSVP on WhatsApp
+  </a>
+</section>
 
-    <!-- COUPLE STORY -->
-    <section class="intro section" id="story">
-      <p class="eyebrow">TWO HEARTS, ONE JOURNEY</p>
-      <h2>Our forever starts<br><em>with you.</em></h2>
+<footer>
+  <p>With love, Aarav & Ananya</p>
+  <p>We look forward to celebrating with you ❤️</p>
+</footer>
 
-      <p class="intro-copy">
-        Some moments become memories. Some people become family.
-        We would be honoured to have you with us as we promise each
-        other a lifetime of love, laughter, and little adventures.
-      </p>
+<script>
+const weddingDate = new Date("2027-02-15T10:30:00+05:30").getTime();
+const countdown = document.getElementById("countdown");
 
-      <div class="flourish">❦</div>
+function updateCountdown() {
+  const distance = weddingDate - Date.now();
 
-      <div class="couple-grid">
-        <!-- GROOM IMAGE -->
-        <article class="person-card">
-          <img
+  if (distance <= 0) {
+    countdown.textContent = "The wedding day is here!";
+    return;
+  }
+
+  const days = Math.floor(distance / 86400000);
+  const hours = Math.floor((distance % 86400000) / 3600000);
+  const minutes = Math.floor((distance % 3600000) / 60000);
+  const seconds = Math.floor((distance % 60000) / 1000);
+
+  countdown.textContent =
+    `${days} days ${hours} hours ${minutes} min ${seconds} sec`;
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+const music = document.getElementById("weddingMusic");
+const musicButton = document.getElementById("musicButton");
+
+musicButton.addEventListener("click", async () => {
+  if (music.paused) {
+    try {
+      await music.play();
+      musicButton.textContent = "❚❚ Pause Music";
+    } catch {
+      musicButton.textContent = "Music unavailable — check your connection";
+    }
+  } else {
+    music.pause();
+    musicButton.textContent = "▶ Play Music";
+  }
+});
+
+music.addEventListener("ended", () => {
+  musicButton.textContent = "▶ Play Music";
+});
+</script>
+
+</body>
+</html>
